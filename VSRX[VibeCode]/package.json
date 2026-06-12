@@ -1,0 +1,236 @@
+{
+    "name": "vsrxvc",
+    "displayName": "VSRXVC",
+    "description": "VSRXVC (Visual Studio Roblox Vibe Coding) - Run Roblox Lua scripts seamlessly from Visual Studio Code.",
+    "publisher": "BBD5",
+    "version": "1.0.60",
+    "engines": {
+        "vscode": "^1.74.0"
+    },
+    "icon": "resources/VSRX.png",
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onStartupFinished",
+        "onLanguage:lua",
+        "onLanguage:luau",
+        "onCommand:vsrx.showClients",
+        "onCommand:vsrx.runScript",
+        "onCommand:vsrx.saveScript",
+        "onCommand:vsrx.showSavedScripts",
+        "onCommand:vsrx.showScriptHub",
+        "onCommand:vsrx.executeScriptText",
+        "onCommand:vsrx.configureHotkey",
+        "onCommand:vsrx.setupCopilotFiles",
+        "onCommand:vsrx.runSelection",
+        "onCommand:vsrx.showConsole",
+        "onCommand:vsrx.instanceSearch",
+        "onCommand:vsrx.scriptHistory",
+        "onCommand:vsrx.screenshot",
+        "onCommand:vsrx.guiInteraction"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "vsrx.runScript",
+                "title": "VSRXVC: Run Script",
+                "icon": "$(play)"
+            },
+            {
+                "command": "vsrx.saveScript",
+                "title": "VSRXVC: Save Script to File",
+                "icon": "$(save)"
+            },
+            {
+                "command": "vsrx.showSavedScripts",
+                "title": "VSRXVC: Save (Browse)",
+                "icon": "$(folder)"
+            },
+            {
+                "command": "vsrx.showScriptHub",
+                "title": "VSRXVC: Hub",
+                "icon": "$(cloud-download)"
+            },
+            {
+                "command": "vsrx.showClients",
+                "title": "VSRXVC: Manage Clients"
+            },
+            {
+                "command": "vsrx.executeScriptText",
+                "title": "VSRXVC: Execute Script Text",
+                "icon": "$(run-all)"
+            },
+            {
+                "command": "vsrx.configureHotkey",
+                "title": "VSRXVC: Configure Hotkey",
+                "icon": "$(keyboard)"
+            },
+            {
+                "command": "vsrx.setupCopilotFiles",
+                "title": "VSRXVC: Setup Copilot Files",
+                "icon": "$(copilot)"
+            },
+            {
+                "command": "vsrx.runSelection",
+                "title": "VSRXVC: Run Selection",
+                "icon": "$(run-below)"
+            },
+            {
+                "command": "vsrx.showConsole",
+                "title": "VSRXVC: Show Console",
+                "icon": "$(output)"
+            },
+            {
+                "command": "vsrx.instanceSearch",
+                "title": "VSRXVC: Instance Search",
+                "icon": "$(search)"
+            },
+            {
+                "command": "vsrx.scriptHistory",
+                "title": "VSRXVC: Script History",
+                "icon": "$(history)"
+            },
+            {
+                "command": "vsrx.screenshot",
+                "title": "VSRXVC: Screenshot (Windows)",
+                "icon": "$(device-camera)"
+            },
+            {
+                "command": "vsrx.guiInteraction",
+                "title": "VSRXVC: GUI Interaction",
+                "icon": "$(layout)"
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "vsrx.runScript",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "vsrx.saveScript",
+                    "group": "navigation@2"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "command": "vsrx.runScript",
+                "key": "f5",
+                "mac": "f5",
+                "when": "editorTextFocus && (editorLangId == lua || editorLangId == luau)"
+            },
+            {
+                "command": "vsrx.runSelection",
+                "key": "ctrl+f5",
+                "mac": "ctrl+f5",
+                "when": "editorTextFocus && (editorLangId == lua || editorLangId == luau)"
+            }
+        ],
+        "languageModelTools": [
+            {
+                "name": "vsrx_execute",
+                "tags": [
+                    "roblox",
+                    "lua",
+                    "script",
+                    "execute"
+                ],
+                "displayName": "VSRXVC: Execute Lua Script in Roblox",
+                "modelDescription": "Executes a Lua script in the currently connected Roblox client via VSRX. Use this when the user wants to run Lua code in Roblox. Returns how many clients received the script.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "script": {
+                            "type": "string",
+                            "description": "The Lua script code to execute in Roblox."
+                        }
+                    },
+                    "required": [
+                        "script"
+                    ]
+                }
+            }
+        ],
+        "configuration": {
+            "title": "VSRXVC",
+            "properties": {
+                "vsrx.showNotifications": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[UI] Show info notifications when executing or saving scripts."
+                },
+                "vsrx.showSaveButton": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[UI] Show the 'Save' shortcut on the Status Bar."
+                },
+                "vsrx.showHubButton": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[UI] Show the 'Hub' shortcut on the Status Bar."
+                },
+                "vsrx.enableConsoleCapture": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[Console] Completely Enable/Disable live Roblox log capture. Use this to reduce network usage or lag."
+                },
+                "vsrx.enableInternalUI": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "[Roblox] Enable the Iris-based (ImGui) internal UI menu for management inside Roblox."
+                },
+                "vsrx.showUIOnLoad": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "[Roblox] Automatically show the internal UI when the loader script runs (instead of waiting for F1)."
+                },
+                "vsrx.defaultSavePath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "[Scripts] The default directory where your VSRX scripts are saved. Used for both saving and the In-Game browser."
+                },
+                "vsrx.statusBarVisibility": {
+                    "type": "string",
+                    "default": "always",
+                    "enum": ["always", "luaOnly"],
+                    "enumDescriptions": [
+                        "Always show the VSRX status bar panel.",
+                        "Show the VSRX status bar panel only when a Lua or Luau file is active."
+                    ],
+                    "description": "[UI] When to show the VSRX status bar panel."
+                },
+                "vsrx.noClientGuideAutoShow": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[Inject UI] Automatically show the Inject setup guide when no Roblox clients are connected."
+                },
+                "vsrx.noClientGuideAutoCopyOnOpen": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[Inject UI] Automatically copy the loader script when the Inject setup guide opens (auto or manual)."
+                },
+                "vsrx.noClientGuideRepeatSeconds": {
+                    "type": "number",
+                    "default": 120,
+                    "minimum": 0,
+                    "description": "[Inject UI] Delay in seconds before auto-showing the no-client guide again after it was closed. Set 0 for immediate reopen behavior while no clients are connected."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile && npm run obfuscate",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "obfuscate": "javascript-obfuscator out/extension.js --output out/extension.js --compact true --control-flow-flattening true --control-flow-flattening-threshold 0.75 --dead-code-injection true --dead-code-injection-threshold 0.4 --identifier-names-generator hexadecimal --rename-globals false --self-defending true --string-array true --string-array-encoding rc4 --string-array-threshold 0.75 --unicode-escape-sequence false --source-map false && javascript-obfuscator out/server.js --output out/server.js --compact true --control-flow-flattening true --control-flow-flattening-threshold 0.75 --dead-code-injection true --dead-code-injection-threshold 0.4 --identifier-names-generator hexadecimal --rename-globals false --self-defending true --string-array true --string-array-encoding rc4 --string-array-threshold 0.75 --unicode-escape-sequence false --source-map false"
+    },
+    "devDependencies": {
+        "@types/node": "16.x",
+        "@types/vscode": "^1.74.0",
+        "javascript-obfuscator": "^5.4.2",
+        "typescript": "^4.9.3"
+    }
+}
